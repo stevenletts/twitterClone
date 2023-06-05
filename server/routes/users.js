@@ -11,7 +11,7 @@ const { verifyToken } = require("../verifyToken");
 
 userRouter.get("/", getAll);
 
-userRouter.get("/:id", getOne);
+userRouter.get("/find/:id", getOne);
 
 userRouter.put("/:id", verifyToken, update);
 

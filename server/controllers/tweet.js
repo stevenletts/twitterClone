@@ -1,4 +1,5 @@
 const Tweet = require("../models/Tweet");
+const User = require("../models/User");
 const { handleError } = require("../error");
 
 const createTweet = async (req, res, next) => {
