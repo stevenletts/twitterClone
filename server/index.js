@@ -3,13 +3,14 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-
 // Routes
 const userRouter = require("./routes/users");
 const authRouter = require("./routes/auths");
 const tweetRouter = require("./routes/tweets");
 
 const app = express();
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+
 dotenv.config();
 
 const connect = () => {
@@ -22,7 +23,7 @@ const connect = () => {
       throw error;
     });
 };
-app.use(cors());
+
 app.use(cookieParser());
 app.use(express.json());
 
