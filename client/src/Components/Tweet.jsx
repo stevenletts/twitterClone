@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import formatDistance from "date-fns/formatDistance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,13 +14,33 @@ const Tweet = ({ tweet, setData }) => {
 
   const dateStr = formatDistance(new Date(tweet.createdAt), new Date());
 
+  const location = useLocation().pathname;
+
+  const { id } = useParams();
+
   const handleLike = async (e) => {
     e.preventDefault();
     try {
-      const like = await axios.put(
-        `http://localhost:3000/api/tweet/${tweet._id}/like`,
-        { id: currentUser._id }
-      );
+      await axios.put(`http://localhost:3000/api/tweet/${tweet._id}/like`, {
+        id: currentUser._id,
+      });
+
+      if (location.includes("profile")) {
+        const newData = await axios.get(
+          `http://localhost:3000/api/tweet/user/all${id}`
+        );
+        setData(newData.data);
+      } else if (location.includes("explore")) {
+        const newData = await axios.get(
+          `http://localhost:3000/api/tweet/explore`
+        );
+        setData(newData.data);
+      } else {
+        const newData = await axios.get(
+          `http://localhost:3000/api/tweet/timeline/${currentUser._id}`
+        );
+        setData(newData.data);
+      }
     } catch (err) {
       console.log(err);
     }

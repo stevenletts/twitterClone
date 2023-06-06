@@ -13,7 +13,6 @@ const Timeline = () => {
         const data = await axios.get(
           `http://localhost:3000/api/tweet/timeline/${currentUser._id}`
         );
-        console.log("in useeffect", data);
         setTimeline(data.data);
       } catch (err) {
         console.log(err);
@@ -21,8 +20,6 @@ const Timeline = () => {
     };
     fetchData();
   }, [currentUser._id]);
-
-  console.log(timeline);
 
   return (
     <div className="mt-6">

@@ -20,6 +20,7 @@ const SignIn = () => {
         username,
         password,
       });
+      console.log(res);
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {

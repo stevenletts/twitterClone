@@ -4,10 +4,12 @@ import PersonIcon from "@mui/icons-material/Person";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/userReducer";
+import { useSelector } from "react-redux";
 
 const LeftSideBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentUser } = useSelector((s) => s.user);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const LeftSideBar = () => {
             <p>Explore</p>
           </div>
         </Link>
-        <Link to="/profile/">
+        <Link to={`/profile/${currentUser._id}`}>
           <div className="flex items-center space-x-6 px-2 py-2 hover:bg-slate-200 rounded-full cursor-pointer">
             <PersonIcon fontSize="large" />
             <p>Profile</p>
