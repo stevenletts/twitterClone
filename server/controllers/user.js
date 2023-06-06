@@ -22,7 +22,8 @@ const getOne = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  if (req.params.id === req.user.id) {
+  console.log(req);
+  if (req.params.id) {
     try {
       const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
