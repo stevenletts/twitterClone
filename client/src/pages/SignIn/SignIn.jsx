@@ -29,22 +29,22 @@ const SignIn = () => {
     }
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     console.log("signup");
     e.preventDefault();
     try {
       dispatch(loginStart);
-      const res = axios.post("http://localhost:3000/api/auth/signup", {
+      const res = await axios.post("http://localhost:3000/api/auth/signup", {
         username,
         password,
         email,
       });
+
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
       console.log(err);
       dispatch(loginFailed);
-      //add notification
     }
   };
 

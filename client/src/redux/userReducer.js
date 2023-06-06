@@ -25,10 +25,31 @@ const userSlice = createSlice({
     logout: (state) => {
       return initialState;
     },
+    changeProfile: (state, action) => {
+      console.log(action);
+      state.currentUser.profilePicture = action.payload;
+    },
+    following: (state, action) => {
+      if (state.currentUser.following.includes(action.payload)) {
+        state.currentUser.following.splice(
+          state.currentUser.following.findIndex(
+            (followingId) => followingId === action.payload
+          )
+        );
+      } else {
+        state.currentUser.following.push(action.payload);
+      }
+    },
   },
 });
 
 export default userSlice.reducer;
 
-export const { loginStart, loginSuccess, loginFailed, logout } =
-  userSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailed,
+  logout,
+  changeProfile,
+  following,
+} = userSlice.actions;
