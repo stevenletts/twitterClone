@@ -9,7 +9,12 @@ const authRouter = require("./routes/auths");
 const tweetRouter = require("./routes/tweets");
 
 const app = express();
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://heroic-strudel-4cfe14.netlify.app/",
+  })
+);
 app.use(express.static("dist"));
 
 dotenv.config();
