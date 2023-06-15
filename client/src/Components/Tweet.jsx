@@ -21,19 +21,26 @@ const Tweet = ({ tweet, setData }) => {
   const handleLike = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/tweet/${tweet._id}/like`, {
-        id: currentUser._id,
-      });
+      await axios.put(
+        `https://twitter-clone-dtwq.onrender.com/api/tweet/${tweet._id}/like`,
+        {
+          id: currentUser._id,
+        }
+      );
 
       if (location.includes("profile")) {
-        const newData = await axios.get(`/api/tweet/user/all${id}`);
+        const newData = await axios.get(
+          `https://twitter-clone-dtwq.onrender.com/api/tweet/user/all${id}`
+        );
         setData(newData.data);
       } else if (location.includes("explore")) {
-        const newData = await axios.get(`/api/tweet/explore`);
+        const newData = await axios.get(
+          `https://twitter-clone-dtwq.onrender.com/api/tweet/explore`
+        );
         setData(newData.data);
       } else {
         const newData = await axios.get(
-          `/api/tweet/timeline/${currentUser._id}`
+          `https://twitter-clone-dtwq.onrender.com/api/tweet/timeline/${currentUser._id}`
         );
         setData(newData.data);
       }
@@ -45,7 +52,9 @@ const Tweet = ({ tweet, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`/api/user/find/${tweet.userId}`);
+        const findUser = await axios.get(
+          `https://twitter-clone-dtwq.onrender.com/api/user/find/${tweet.userId}`
+        );
         setUserData(findUser.data);
       } catch (err) {
         console.log(err);

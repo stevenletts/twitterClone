@@ -12,7 +12,7 @@ const MainTweet = () => {
 
     try {
       await axios.post(
-        "/api/tweet",
+        "https://twitter-clone-dtwq.onrender.com/api/tweet",
         {
           userId: currentUser._id,
           description: tweetText,

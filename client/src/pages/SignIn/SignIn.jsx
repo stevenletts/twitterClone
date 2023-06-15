@@ -16,10 +16,13 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("/api/auth/signin", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://twitter-clone-dtwq.onrender.com/api/auth/signin",
+        {
+          username,
+          password,
+        }
+      );
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
@@ -32,11 +35,14 @@ const SignIn = () => {
     e.preventDefault();
     try {
       dispatch(loginStart);
-      const res = await axios.post("/api/auth/signup", {
-        username,
-        password,
-        email,
-      });
+      const res = await axios.post(
+        "https://twitter-clone-dtwq.onrender.com/api/auth/signup",
+        {
+          username,
+          password,
+          email,
+        }
+      );
 
       dispatch(loginSuccess(res.data));
       navigate("/");

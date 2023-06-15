@@ -22,9 +22,11 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const res = await axios
-          .get(`/api/user/find/${id}`)
+          .get(`https://twitter-clone-dtwq.onrender.com/api/user/find/${id}`)
           .catch(() => navigate(-1));
-        const res2 = await axios.get(`/api/tweet/user/all/${id}`);
+        const res2 = await axios.get(
+          `https://twitter-clone-dtwq.onrender.com/api/tweet/user/all/${id}`
+        );
         setUserTweets(res2.data);
         setuserProfile(res.data);
       } catch (error) {
@@ -37,14 +39,20 @@ const Profile = () => {
 
   const handleFollow = async () => {
     if (!currentUser.following.includes(id)) {
-      await axios.put(`/api/user/follow/${id}`, {
-        id: currentUser._id,
-      });
+      await axios.put(
+        `https://twitter-clone-dtwq.onrender.com/api/user/follow/${id}`,
+        {
+          id: currentUser._id,
+        }
+      );
       dispatch(following(id));
     } else {
-      await axios.put(`/api/user/unfollow/${id}`, {
-        id: currentUser._id,
-      });
+      await axios.put(
+        `https://twitter-clone-dtwq.onrender.com/api/user/unfollow/${id}`,
+        {
+          id: currentUser._id,
+        }
+      );
       dispatch(following(id));
     }
   };

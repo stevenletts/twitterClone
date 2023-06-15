@@ -15,7 +15,7 @@ import { changeProfile, logout } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 
-const baseURL = "/api/user";
+const baseURL = "https://twitter-clone-dtwq.onrender.com/api/user";
 
 // eslint-disable-next-line react/prop-types
 const EditProfile = ({ setOpen }) => {

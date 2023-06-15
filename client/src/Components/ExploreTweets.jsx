@@ -10,7 +10,9 @@ const ExploreTweets = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("/api/tweet/explore");
+        const res = await axios.get(
+          "https://twitter-clone-dtwq.onrender.com/api/tweet/explore"
+        );
         setExplore(res.data);
       } catch (error) {
         console.log(error);

@@ -10,7 +10,9 @@ const Timeline = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axios.get(`/api/tweet/timeline/${currentUser._id}`);
+        const data = await axios.get(
+          `https://twitter-clone-dtwq.onrender.com/api/tweet/timeline/${currentUser._id}`
+        );
         setTimeline(data.data);
       } catch (err) {
         console.log(err);
