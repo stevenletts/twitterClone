@@ -1,11 +1,10 @@
 const User = require("../models/User");
-constTweet = require("../models/Tweet");
+const Tweet = require("../models/Tweet");
 const { handleError } = require("../error");
 
 const getAll = async (req, res, next) => {
   try {
     const users = await User.find({});
-    console.log(users);
     res.status(200).json(users);
   } catch (err) {
     next(err);
@@ -22,7 +21,6 @@ const getOne = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-  console.log(req);
   if (req.params.id) {
     try {
       const updatedUser = await User.findByIdAndUpdate(
@@ -42,15 +40,13 @@ const update = async (req, res, next) => {
 };
 
 const remove = async (req, res, next) => {
-  if (req.params.id === req.user.id) {
-    try {
-      await User.findByIdAndDelete(req, params.id);
-      await Tweet.remove({ userId: req.params.id });
-      res.status(200).json("user deleted");
-    } catch (err) {
-      next(err);
-    }
-  } else return next(handleError(403, "you can only delete your own account"));
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    await Tweet.deleteMany({ userId: req.params.id });
+    res.status(200).json("user deleted");
+  } catch (err) {
+    next(err);
+  }
 };
 
 const follow = async (req, res, next) => {

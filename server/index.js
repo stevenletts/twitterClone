@@ -10,6 +10,7 @@ const tweetRouter = require("./routes/tweets");
 
 const app = express();
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(express.static("dist"));
 
 dotenv.config();
 
@@ -31,7 +32,9 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/tweet", tweetRouter);
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
   connect();
-  console.log("listening on port 3000");
+  console.log(`listening on ${PORT}`);
 });
