@@ -37,5 +37,5 @@
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9"
   },
-  "proxy": "http://localhost:3000/api"
+  "proxy": "http://localhost:3000"
 }

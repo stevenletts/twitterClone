@@ -12,7 +12,7 @@ const MainTweet = () => {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/tweet",
+        "/api/tweet",
         {
           userId: currentUser._id,
           description: tweetText,

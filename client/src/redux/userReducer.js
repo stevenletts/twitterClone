@@ -26,7 +26,6 @@ const userSlice = createSlice({
       return initialState;
     },
     changeProfile: (state, action) => {
-      console.log(action);
       state.currentUser.profilePicture = action.payload;
     },
     following: (state, action) => {

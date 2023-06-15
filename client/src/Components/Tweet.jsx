@@ -21,23 +21,19 @@ const Tweet = ({ tweet, setData }) => {
   const handleLike = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/tweet/${tweet._id}/like`, {
+      await axios.put(`/api/tweet/${tweet._id}/like`, {
         id: currentUser._id,
       });
 
       if (location.includes("profile")) {
-        const newData = await axios.get(
-          `http://localhost:3000/api/tweet/user/all${id}`
-        );
+        const newData = await axios.get(`/api/tweet/user/all${id}`);
         setData(newData.data);
       } else if (location.includes("explore")) {
-        const newData = await axios.get(
-          `http://localhost:3000/api/tweet/explore`
-        );
+        const newData = await axios.get(`/api/tweet/explore`);
         setData(newData.data);
       } else {
         const newData = await axios.get(
-          `http://localhost:3000/api/tweet/timeline/${currentUser._id}`
+          `/api/tweet/timeline/${currentUser._id}`
         );
         setData(newData.data);
       }
@@ -49,9 +45,7 @@ const Tweet = ({ tweet, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(
-          `http://localhost:3000/api/user/find/${tweet.userId}`
-        );
+        const findUser = await axios.get(`/api/user/find/${tweet.userId}`);
         setUserData(findUser.data);
       } catch (err) {
         console.log(err);

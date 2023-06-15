@@ -22,11 +22,9 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const res = await axios
-          .get(`http://localhost:3000/api/user/find/${id}`)
+          .get(`/api/user/find/${id}`)
           .catch(() => navigate(-1));
-        const res2 = await axios.get(
-          `http://localhost:3000/api/tweet/user/all/${id}`
-        );
+        const res2 = await axios.get(`/api/tweet/user/all/${id}`);
         setUserTweets(res2.data);
         setuserProfile(res.data);
       } catch (error) {
@@ -39,14 +37,12 @@ const Profile = () => {
 
   const handleFollow = async () => {
     if (!currentUser.following.includes(id)) {
-      console.log("##############################");
-
-      await axios.put(`http://localhost:3000/api/user/follow/${id}`, {
+      await axios.put(`/api/user/follow/${id}`, {
         id: currentUser._id,
       });
       dispatch(following(id));
     } else {
-      await axios.put(`http://localhost:3000/api/user/unfollow/${id}`, {
+      await axios.put(`/api/user/unfollow/${id}`, {
         id: currentUser._id,
       });
       dispatch(following(id));

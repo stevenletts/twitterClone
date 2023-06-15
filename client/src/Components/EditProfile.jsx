@@ -14,6 +14,10 @@ import { useDispatch } from "react-redux";
 import { changeProfile, logout } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
+
+const baseURL = "/api/user";
+
+// eslint-disable-next-line react/prop-types
 const EditProfile = ({ setOpen }) => {
   const [profileImage, setProfileImage] = useState("");
   const [imgUpProg, setImgUpProg] = useState(0);
@@ -35,10 +39,8 @@ const EditProfile = ({ setOpen }) => {
         setImgUpProg(Math.round(progress));
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
             break;
           case "running":
-            console.log("Upload is running");
             break;
         }
       },
@@ -64,20 +66,19 @@ const EditProfile = ({ setOpen }) => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           const updatedProfile = await axios.put(
-            `http://localhost:3000/api/user/${currentUser._id}`,
+            `${baseURL}/${currentUser._id}`,
             {
               profilePicture: downloadURL,
             }
           );
           dispatch(changeProfile(updatedProfile));
-          console.log("File available at", downloadURL);
         });
       }
     );
   };
 
   const handleDelete = async () => {
-    await axios.delete(`/user/${currentUser._id}`);
+    await axios.delete(`${baseURL}/${currentUser._id}`);
     dispatch(logout());
     navigate("/signin");
   };

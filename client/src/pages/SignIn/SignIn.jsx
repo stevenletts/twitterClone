@@ -16,11 +16,10 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/signin", {
+      const res = await axios.post("/api/auth/signin", {
         username,
         password,
       });
-      console.log(res);
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
@@ -30,11 +29,10 @@ const SignIn = () => {
   };
 
   const handleSignUp = async (e) => {
-    console.log("signup");
     e.preventDefault();
     try {
       dispatch(loginStart);
-      const res = await axios.post("http://localhost:3000/api/auth/signup", {
+      const res = await axios.post("/api/auth/signup", {
         username,
         password,
         email,
